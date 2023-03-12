@@ -1,5 +1,5 @@
 const config = {
-    pagination: 12,
+    pagination: 24,
 }
 
 export default config;

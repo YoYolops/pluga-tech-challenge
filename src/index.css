@@ -1,5 +1,26 @@
 * {
     box-sizing: border-box;
+    
+}
+::-webkit-scrollbar {
+    width: 7.5px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+    border-radius: 15px;
+}
+    
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 15px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    transition: all ease-in-out 0.7s;
+    background: #555; 
 }
 
 html, body, div, span, applet, object, iframe,
@@ -21,6 +42,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    scrollbar-gutter: stable both-edges;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
