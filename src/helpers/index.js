@@ -1,6 +1,7 @@
 // Fetched from https://awik.io/determine-color-bright-dark-using-javascript/
 // To learn more: https://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
 function isColorLightOrDark(color) {
+    if(!color) return "dark"
     // Variables for red, green, blue values
     let r, g, b, hsp;
     

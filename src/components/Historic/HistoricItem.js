@@ -3,6 +3,7 @@ import "./Historic.css"
 import { isColorLightOrDark } from "../../helpers"
 
 export default function HisotricItem({ itemData }) {
+
     return (
         <motion.a
             layout

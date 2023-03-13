@@ -18,8 +18,10 @@ export function DataContextProvider({ children }) {
 
     function updateHistoric(lastSelected) {
         setHistoric(prev => {
-            if(prev.length >= 3) return [...prev.slice(1, 3), lastSelected]
-            return [...prev, lastSelected]
+            const recommendedSet = new Set([...prev, lastSelected])
+
+            if(recommendedSet.size > 3) return [...recommendedSet].slice(recommendedSet.size-3, recommendedSet.size)
+            return [...recommendedSet]
         })
     }
 

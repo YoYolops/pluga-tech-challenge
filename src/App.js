@@ -10,8 +10,8 @@ function App() {
     const [ selectedCard, setSelectedCard ] = useState({});
 
     function closeModal(currentSelectedData) {
-        updateHistoric(currentSelectedData)
         setSelectedCard({})
+        updateHistoric(currentSelectedData)
     }
 
     return (

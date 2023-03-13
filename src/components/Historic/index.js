@@ -9,10 +9,11 @@ export default function Historic() {
 
     function mergeHighestRankedWithHistoric() {
         let recommendedArray = []
-        if(historic.length) recommendedArray = [...historic, ...highestRanked]
+
+        if(historic.length) recommendedArray = [...highestRanked, ...historic]
         else recommendedArray = [...highestRanked]
-        recommendedArray.length = 3
-        return recommendedArray
+
+        return recommendedArray.slice(recommendedArray.length - 3, recommendedArray.length)
     }
 
     return (
