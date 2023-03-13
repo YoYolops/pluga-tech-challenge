@@ -9,14 +9,19 @@
     flex-direction: column;
     border-radius: 5px;
     padding: 8px 2px;
-    width: 120px;
+    width: clamp( 25%, 120px, 85px);
     font-weight: bold;
 }
 
 .historic_item_container > #historic_item_name {
     text-align: center;
-    font-size: 1rem;
+    font-size: .9rem;
     margin-bottom: 0px;
+    max-width: 95%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .historic_item_icon {

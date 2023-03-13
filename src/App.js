@@ -2,11 +2,14 @@ import { useState, useContext, useEffect } from "react";
 import DataContext from "./components/DataContext";
 import AppCard from "./components/AppCard";
 import "./App.css";
-import SearchBar from "./components/SearchBar";
+import Header from "./components/Header";
 
 function App() {
-    const { getData, updateHistoric } = useContext(DataContext)
-    const [ renderedData, setRenderedData ] = useState(getData(0));
+    const { getData, updateHistoric, filteredData } = useContext(DataContext)
+    const [ renderedData, setRenderedData ] = useState({
+        data: getData(0),
+        chunk: 0
+    });
     const [ selectedCard, setSelectedCard ] = useState({});
 
     function closeModal(currentSelectedData) {
@@ -14,19 +17,44 @@ function App() {
         updateHistoric(currentSelectedData)
     }
 
-    return (
-        <div className="app_container">
-            <SearchBar />
+    useEffect(() => {
+        const intersectionObserver = new IntersectionObserver(entries => {
+            if(entries.some(entry => entry.isIntersecting)) {
+                setRenderedData(prev => ({
+                    data: [...prev.data, ...getData(prev.chunk + 1)],
+                    chunk: prev.chunk + 1
+                }))
+            }
+        })
 
-            <section className="cards_container">{
-                renderedData.map((data, index) => <AppCard appData={data}
-                                                  isOpen={selectedCard.app_id === data.app_id}
-                                                  key={`${data.app_id}-appcard-${index}`}
-                                                  select={() => { setSelectedCard(data) }} 
-                                                  close={() => { closeModal(data) }}
-                                                  mode="expandable" />)
-            }</section>
-        </div>
+        intersectionObserver.observe(document.querySelector("#sentinel"))
+
+        return () => intersectionObserver.disconnect()
+    }, [])
+
+    useEffect(() => {
+        console.log("rendered data length: ",renderedData.data.length)
+    }, [renderedData])
+
+    return (
+        <>
+            <Header />
+            <div className="app_container">
+
+                <section className="cards_container">{
+                    (filteredData.length ? filteredData : renderedData.data)
+                        .map((data, index) => <AppCard appData={data}
+                                                    isOpen={selectedCard.app_id === data.app_id}
+                                                    key={`${data.app_id}-appcard-${index}`}
+                                                    select={() => { setSelectedCard(data) }} 
+                                                    close={() => { closeModal(data) }}
+                                                    mode="expandable" />)
+                }
+                
+                    <div id="sentinel" />
+                </section>
+            </div>
+        </>
     );
 }
 

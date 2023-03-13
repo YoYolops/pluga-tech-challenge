@@ -2,6 +2,7 @@ import { animate, AnimatePresence, motion } from "framer-motion";
 import "./AppCard.css"
 import Anchor from "../generics/Anchor";
 import Historic from "../Historic";
+import CloseIcon from "../../assets/icons/CloseIcon";
 
 export default function AppCard({ appData, select, mode, isOpen, close }) {
 
@@ -49,13 +50,14 @@ export default function AppCard({ appData, select, mode, isOpen, close }) {
                     
                     <motion.button layout className="close_button"
                         initial={{ opacity: 0 }}
+                        style={{ pointerEvents: isOpen ? "unset" : "none" }}
                         animate={isOpen ? {opacity: 1} : {opacity: 0}}
                         onClick={clickAuthorizer(e => {
                             e.stopPropagation()
                             close()
                         })}
                     >
-                        FECHAR
+                        <CloseIcon color={appData.color}/>
                     </motion.button>
                 </motion.div>
             </motion.div>

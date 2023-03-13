@@ -1,0 +1,53 @@
+.main_header {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 40px;
+}
+
+.main_header:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -10;
+    background-color: #0ea6fe;
+    transform: skewY(-5deg);
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+    height: 600px;
+
+}
+
+.pluga_alltype {
+    background: url(https://pluga.co/images/pluga-alltype-white.png);
+    background-image: url(https://pluga.co/images/pluga-alltype-white.svg),none;
+    height: 120px;
+    width: clamp(100%, 300px, 100px);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.presentation {
+    color: #fff;
+    font-size: 1rem;
+    width: clamp(40%, 600px, 90%);
+}
+
+.presentation h1 {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.presentation h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+

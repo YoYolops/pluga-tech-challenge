@@ -7,19 +7,19 @@ const DataContext = createContext({});
 export function DataContextProvider({ children }) {
     const [ highestRanked, setHighestRanked ] = useState([])
     const [ historic, setHistoric ] = useState([])
+    const [ filteredData, setFilteredData ] = useState([])
 
     function getData(paginationChunk) {
         const firstIndex = paginationChunk*config.pagination
         const lastIndex = firstIndex+config.pagination
         
-        if(firstIndex >= data.length) return;
+        if(firstIndex >= data.length) return [];
         return data.slice(firstIndex, data[lastIndex] ? lastIndex : data.length)
     }
 
     function updateHistoric(lastSelected) {
         setHistoric(prev => {
             const recommendedSet = new Set([...prev, lastSelected])
-
             if(recommendedSet.size > 3) return [...recommendedSet].slice(recommendedSet.size-3, recommendedSet.size)
             return [...recommendedSet]
         })
@@ -27,7 +27,7 @@ export function DataContextProvider({ children }) {
 
     useEffect(() => {
         async function getUpdatedPlugaRanking() {
-            const data = await fetch("https://api-support.pluga.co/apps/")
+            const data = await fetch(config.rankingBaseUrl)
                 .then(response => response.json())
     
             const topFour = 
@@ -46,13 +46,18 @@ export function DataContextProvider({ children }) {
         getUpdatedPlugaRanking()
     }, [])
 
+    function filterData(filterFunction) {
+        setFilteredData(data.filter(filterFunction))
+    }
     
     return (
         <DataContext.Provider value={{
             getData,
             historic,
             updateHistoric,
-            highestRanked
+            highestRanked,
+            filterData,
+            filteredData
         }}>
             {children}
         </DataContext.Provider>
