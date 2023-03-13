@@ -37,6 +37,30 @@ function isColorLightOrDark(color) {
     else return "dark"
 }
 
+function findHighestKey({ array, keyName, topAmount, ignore }) {
+    return array.filter(app => 
+        app[keyName] <= topAmount && 
+        !ignore.some(ignoreName => app.name === ignoreName)    
+    )
+}
+
+function formatUnderscoredString(str) {
+    let formattedString = "";
+    let lastChar;
+
+    for(const char of str) {
+        if(char === "_") formattedString += " "
+        else if((lastChar === "_") || lastChar === undefined) formattedString += char.toUpperCase();
+        else formattedString += char.toLowerCase();
+
+        lastChar = char
+    }
+
+    return formattedString;
+}
+
 export {
-    isColorLightOrDark
+    isColorLightOrDark,
+    findHighestKey,
+    formatUnderscoredString
 }

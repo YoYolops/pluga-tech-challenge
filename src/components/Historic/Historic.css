@@ -1,0 +1,45 @@
+
+.historic_item_container {
+    text-decoration: none;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex:  none;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 8px 2px;
+    width: 120px;
+    font-weight: bold;
+}
+
+.historic_item_container > #historic_item_name {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 0px;
+}
+
+.historic_item_icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    padding: 3px;
+    object-position: center;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.historic_cards_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+#historic_title {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: 10px;
+    margin-bottom: 20px;
+}

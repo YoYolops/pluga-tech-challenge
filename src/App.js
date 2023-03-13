@@ -3,24 +3,15 @@ import DataContext from "./components/DataContext";
 import AppCard from "./components/AppCard";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
-import { motion } from "framer-motion";
 
 function App() {
-    const { getData } = useContext(DataContext)
+    const { getData, updateHistoric } = useContext(DataContext)
     const [ renderedData, setRenderedData ] = useState(getData(0));
     const [ selectedCard, setSelectedCard ] = useState({});
-    const [ historic, setHistoric ] = useState([]);
-
-    function updateHistoric(lastSelected) {
-        setHistoric(prev => {
-            if(prev.length >= 3) return [...prev.slice(0, 2), lastSelected]
-            return [...prev, lastSelected]
-        })
-    }
 
     function closeModal(currentSelectedData) {
-        setSelectedCard({})
         updateHistoric(currentSelectedData)
+        setSelectedCard({})
     }
 
     return (
@@ -28,11 +19,12 @@ function App() {
             <SearchBar />
 
             <section className="cards_container">{
-                renderedData.map(data => <AppCard appData={data} 
+                renderedData.map((data, index) => <AppCard appData={data}
                                                   isOpen={selectedCard.app_id === data.app_id}
-                                                  historic={historic}
+                                                  key={`${data.app_id}-appcard-${index}`}
                                                   select={() => { setSelectedCard(data) }} 
-                                                  close={() => { closeModal(data) }}/>)
+                                                  close={() => { closeModal(data) }}
+                                                  mode="expandable" />)
             }</section>
         </div>
     );
