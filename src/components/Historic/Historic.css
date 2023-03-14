@@ -1,6 +1,7 @@
 
 .historic_item_container {
     text-decoration: none;
+    width: clamp( 28%, 120px, 85px);
     height: 130px;
     display: flex;
     align-items: center;
@@ -9,7 +10,6 @@
     flex-direction: column;
     border-radius: 5px;
     padding: 8px 2px;
-    width: clamp( 28%, 120px, 85px);
     font-weight: bold;
 }
 

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { DataContextProvider } from './components/DataContext';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <DataContextProvider>

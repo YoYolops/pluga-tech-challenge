@@ -10,7 +10,6 @@ export default function AppCard({ appData, select, isOpen, close }) {
         <motion.div className="app_card" layout
             onClick={select}
         >
-            
             <motion.div layout className="app_card_container"
                 isOpen={`${isOpen}`}
                 transition={baseTransition}

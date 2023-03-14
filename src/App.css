@@ -1,10 +1,10 @@
 .app_container {
-    padding: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     overflow-x: hidden;
+    padding-bottom: 40px;
 }
 
 .cards_container {

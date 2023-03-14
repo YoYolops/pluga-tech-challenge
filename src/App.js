@@ -33,24 +33,23 @@ function App() {
     }, [])
 
     return (
-        <>
-            <Header />
-            <div className="app_container">
 
-                <section className="cards_container">{
-                    (filteredData.length ? filteredData : renderedData.data)
-                        .map((data, index) => <AppCard appData={data}
-                                                    isOpen={selectedCard.app_id === data.app_id}
-                                                    key={`${data.app_id}-appcard-${index}`}
-                                                    select={() => { setSelectedCard(data) }} 
-                                                    close={() => { closeModal(data) }}
-                                                    mode="expandable" />)
-                }
-                
-                    <div id="sentinel" />
-                </section>
-            </div>
-        </>
+        <div className="app_container">
+            <Header />
+
+            <section className="cards_container">{
+                (filteredData.length ? filteredData : renderedData.data)
+                    .map((data, index) => <AppCard appData={data}
+                                                isOpen={selectedCard.app_id === data.app_id}
+                                                key={`${data.app_id}-appcard-${index}`}
+                                                select={() => { setSelectedCard(data) }} 
+                                                close={() => { closeModal(data) }}
+                                                mode="expandable" />)
+            }
+            
+                <div id="sentinel" />
+            </section>
+        </div>
     );
 }
 
