@@ -53,7 +53,6 @@ function formatUnderscoredString(str) {
         if(char === "_") formattedString += " "
         else if((lastChar === "_") || lastChar === undefined) formattedString += char.toUpperCase();
         else formattedString += char.toLowerCase();
-
         lastChar = char
     }
 

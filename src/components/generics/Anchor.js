@@ -1,5 +1,5 @@
-import { motion } from "framer-motion"
-import * as helper from "../../helpers"
+import { motion } from "framer-motion";
+import { isColorLightOrDark } from "../../helpers";
 
 export default function Anchor({ color, link, children, isVisible }) {
     return (
@@ -29,7 +29,6 @@ const anchorVariants = {
             delay: .3
         }
     }
-
 }
 
 function anchorStylesFactory(color, isVisible) {
@@ -42,7 +41,8 @@ function anchorStylesFactory(color, isVisible) {
         borderRadius: 16,
         backgroundColor: color,
         textDecoration: "none",
-        color: helper.isColorLightOrDark(color) === "light" ? "#000000" : "#ffffff",
-        pointerEvents: isVisible ? "unset" : "none"
+        color: isColorLightOrDark(color) === "light" ? "#000000" : "#ffffff",
+        pointerEvents: isVisible ? "unset" : "none",
+        boxShadow: "rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px"
     }
 }

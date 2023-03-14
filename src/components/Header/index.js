@@ -1,5 +1,5 @@
-import "./Header.css"
-import SearchBar from "../SearchBar"
+import "./Header.css";
+import SearchBar from "../SearchBar";
 
 export default function Header() {
     return (
@@ -11,7 +11,6 @@ export default function Header() {
                     <h2>Faça integrações incríveis entre as ferramentas web que você mais usa. E o melhor: sem escrever uma única linha de código.</h2>
                 </div>
             </main>
-
             <SearchBar />
         </header>
     )

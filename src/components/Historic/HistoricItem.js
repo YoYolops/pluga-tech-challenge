@@ -1,7 +1,7 @@
-import { motion } from "framer-motion"
-import "./Historic.css"
-import { isColorLightOrDark } from "../../helpers"
-import { memo, useMemo } from "react"
+import { motion } from "framer-motion";
+import "./Historic.css";
+import { isColorLightOrDark } from "../../helpers";
+import { memo, useMemo } from "react";
 
 function HistoricItem({ itemData }) {
     const colorType = useMemo(() => isColorLightOrDark(itemData.color), [itemData])
@@ -24,6 +24,7 @@ function HistoricItem({ itemData }) {
                 alt={`Logomarca de ${itemData.name}`}
                 style={{
                     backgroundColor: itemData.app_id ? itemData.color : "#27aae1",
+                    border: itemData.app_id ? "2px solid white" : "2px solid white" 
                 }}
             />
 

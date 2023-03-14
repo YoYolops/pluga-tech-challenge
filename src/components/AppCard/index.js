@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import "./AppCard.css"
+import "./AppCard.css";
 import Anchor from "../generics/Anchor";
 import Historic from "../Historic";
-import CloseIcon from "../../assets/icons/CloseIcon";
+import CloseIcon from "../../icons/CloseIcon";
 import { memo } from "react";
 
 function AppCard({ appData, select, isOpen, close }) {
@@ -40,9 +40,8 @@ function AppCard({ appData, select, isOpen, close }) {
                             <Anchor link={appData.link} color={appData.color} isVisible={isOpen}>Acessar</Anchor>
                         </motion.div>
                     </motion.section>
-
                 
-                    {isOpen && <Historic isVisible={isOpen}/>}
+                    { isOpen && <Historic isVisible={isOpen}/> }
                     
                     <motion.button layout className="close_button"
                         initial={{ opacity: 0 }}

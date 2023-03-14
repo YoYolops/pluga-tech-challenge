@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import data from "../assets/data.json";
-import config from "../app.config";
+import APP_CONFIG from "../app.config";
 import { findHighestKey, formatUnderscoredString } from "../helpers";
+
 const DataContext = createContext({});
 
 export function DataContextProvider({ children }) {
@@ -10,8 +11,8 @@ export function DataContextProvider({ children }) {
     const [ filteredData, setFilteredData ] = useState([])
 
     function getData(paginationChunk) {
-        const firstIndex = paginationChunk*config.pagination
-        const lastIndex = firstIndex+config.pagination
+        const firstIndex = paginationChunk*APP_CONFIG.pagination
+        const lastIndex = firstIndex+APP_CONFIG.pagination
         
         if(firstIndex >= data.length) return [];
         return data.slice(firstIndex, data[lastIndex] ? lastIndex : data.length)
@@ -27,7 +28,7 @@ export function DataContextProvider({ children }) {
 
     useEffect(() => {
         async function getUpdatedPlugaRanking() {
-            const data = await fetch(config.rankingBaseUrl)
+            const data = await fetch(APP_CONFIG.rankingBaseUrl)
                 .then(response => response.json())
     
             const topFour = 
@@ -35,19 +36,23 @@ export function DataContextProvider({ children }) {
                 .map(highestRank => ({
                     ...highestRank,
                     name: formatUnderscoredString(highestRank.name),
-                    link: config.appLinksBaseUrl + `${highestRank.name}/`,
+                    link: APP_CONFIG.appLinksBaseUrl + `${highestRank.name}/`,
                     color: "#ffffff",
-                    icon: `${config.appIconLinksBaseUrl + highestRank.name}/${highestRank.name}-icon.svg`
+                    icon: `${APP_CONFIG.appIconLinksBaseUrl + highestRank.name}/${highestRank.name}-icon.svg`
                 }))
     
             setHighestRanked(topFour)
         }
-
         getUpdatedPlugaRanking()
     }, [])
 
     function filterData(filterFunction) {
-        setFilteredData(data.filter(filterFunction))
+        setFilteredData(() => {
+            const preFilteredData = data.filter(filterFunction)
+
+            if(preFilteredData.length) return preFilteredData
+            else return false
+        })
     }
     
     return (
@@ -59,7 +64,7 @@ export function DataContextProvider({ children }) {
             filterData,
             filteredData
         }}>
-            {children}
+            { children }
         </DataContext.Provider>
     )
 }

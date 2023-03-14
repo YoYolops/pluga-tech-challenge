@@ -1,12 +1,11 @@
 import DataContext from "../DataContext";
 import { useContext, useMemo } from "react";
 import HistoricItem from "./HistoricItem";
-import "./Historic.css"
+import "./Historic.css";
 import { motion } from "framer-motion";
 
 export default function Historic({ isVisible }) {
     const { historic, highestRanked } = useContext(DataContext);
-    console.log("historic")
 
     function mergeHighestRankedWithHistoric() {
         let recommendedArray = []
@@ -15,6 +14,12 @@ export default function Historic({ isVisible }) {
         else recommendedArray = [...highestRanked]
 
         return recommendedArray.slice(recommendedArray.length - 3, recommendedArray.length)
+    }
+
+    function wichTitleShouldBeRendered() {
+        if(!historic.length) return "Destaques da Pluga:"
+        if(historic.length < 3) return "Visualizados & em destaque:"
+        return "Últimas ferramentas visualizadas:"
     }
 
     const recommendations = useMemo(mergeHighestRankedWithHistoric, [historic, highestRanked])
@@ -27,7 +32,7 @@ export default function Historic({ isVisible }) {
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
         >
-            <motion.h2 layout id="historic_title">{historic.length ? "Últimas Ferramentas Visualizadas:" : "Destaques da Pluga:"}</motion.h2>
+            <motion.h2 layout id="historic_title">{wichTitleShouldBeRendered()}</motion.h2>
             <motion.div className="historic_cards_wrapper">
                 {recommendations.map((data, index) => <HistoricItem key={`${data.name}historicitem${index}`} itemData={data} />)}
             </motion.div>

@@ -43,6 +43,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    max-width: 130px;
 }
 
 .details {
@@ -59,6 +60,7 @@
     margin: 10px;
     object-position: center;
     object-fit: contain;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
 .tool_link {
@@ -93,9 +95,10 @@
 .app_card_container[isOpen="true"] .modal {
     background-color: #fefffe;
     width: clamp(30%, 500px, 90%);
-    height: min(55vh, 400px);
-    border-radius: 20px;
+    height: min(90vh, 400px);
+    border-radius: 10px;
     position: fixed;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 
 .app_card_container[isOpen="true"] {

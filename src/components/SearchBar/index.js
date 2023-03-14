@@ -1,13 +1,12 @@
-import "./SearchBar.css"
-import { useState, useContext } from "react"
-import SearchIcon from "../../assets/icons/SearchIcon"
-import DataContext from "../DataContext"
+import "./SearchBar.css";
+import { useContext } from "react";
+import SearchIcon from "../../icons/SearchIcon";
+import DataContext from "../DataContext";
 
 export default function SearchBar() {
     const { filterData } = useContext(DataContext)
-    const [ searchQuery, setSearchQuery ] = useState("")
 
-    function performSearch() {
+    function performSearch(searchQuery) {
         filterData(data => (data.name.toLowerCase().search(searchQuery.toLowerCase()) >= 0))
     }
 
@@ -15,7 +14,7 @@ export default function SearchBar() {
             <form className="search_bar_container"
                 onSubmit={e => {
                     e.preventDefault()
-                    performSearch()
+                    performSearch(e.target.elements.searchQuery.value)
                 }}
             >
                 <button
@@ -26,9 +25,10 @@ export default function SearchBar() {
 
                 <input 
                     type="text"
-                    value={searchQuery}
-                    onChange={e => setSearchQuery(e.target.value)}
+                    name="searchQuery"
+                    onChange={e => performSearch(e.target.value)}
                     placeholder="Buscar ferramenta"
+                    autoComplete="off"
                 />
             </form>
     )
