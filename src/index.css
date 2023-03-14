@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
-    
 }
+
 ::-webkit-scrollbar {
     width: 7.5px;
 }
@@ -10,13 +10,11 @@
     background: none;
     border-radius: 15px;
 }
-    
 
 ::-webkit-scrollbar-thumb {
     background: #888; 
     border-radius: 15px;
 }
-
 
 ::-webkit-scrollbar-thumb:hover {
     transition: all ease-in-out 0.7s;
