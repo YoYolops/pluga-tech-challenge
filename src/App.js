@@ -32,10 +32,6 @@ function App() {
         return () => intersectionObserver.disconnect()
     }, [])
 
-    useEffect(() => {
-        console.log("rendered data length: ",renderedData.data.length)
-    }, [renderedData])
-
     return (
         <>
             <Header />

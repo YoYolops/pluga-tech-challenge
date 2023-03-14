@@ -1,5 +1,5 @@
 import "./SearchBar.css"
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import SearchIcon from "../../assets/icons/SearchIcon"
 import DataContext from "../DataContext"
 

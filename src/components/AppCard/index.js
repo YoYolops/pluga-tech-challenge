@@ -1,26 +1,30 @@
-import { animate, AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import "./AppCard.css"
 import Anchor from "../generics/Anchor";
 import Historic from "../Historic";
 import CloseIcon from "../../assets/icons/CloseIcon";
 
-export default function AppCard({ appData, select, mode, isOpen, close }) {
-
-    function clickAuthorizer(func) {
-        if(mode === "readonly") return () => {}
-        return func;
-    }
+export default function AppCard({ appData, select, isOpen, close }) {
 
     return (
         <motion.div className="app_card" layout
-            onClick={clickAuthorizer(select)}
+            onClick={select}
         >
             
             <motion.div layout className="app_card_container"
                 isOpen={`${isOpen}`}
                 transition={baseTransition}
+                onClick={e => {
+                    if(isOpen) {
+                        e.stopPropagation()
+                        close()
+                    }
+                }}
             >
-                <motion.div layout className="modal" transition={{ ...baseTransition, when: "beforeChildren" }}>
+                <motion.div layout className="modal"
+                    transition={{ ...baseTransition, when: "beforeChildren" }}
+                    onClick={e => { if(isOpen) e.stopPropagation() }}
+                >
                     <motion.section className="details_container">
                         <motion.img layout className="app_icon"
                             variants={appLogoVariants}
@@ -52,10 +56,10 @@ export default function AppCard({ appData, select, mode, isOpen, close }) {
                         initial={{ opacity: 0 }}
                         style={{ pointerEvents: isOpen ? "unset" : "none" }}
                         animate={isOpen ? {opacity: 1} : {opacity: 0}}
-                        onClick={clickAuthorizer(e => {
+                        onClick={e => {
                             e.stopPropagation()
                             close()
-                        })}
+                        }}
                     >
                         <CloseIcon color={appData.color}/>
                     </motion.button>
@@ -68,7 +72,7 @@ export default function AppCard({ appData, select, mode, isOpen, close }) {
 const appLogoVariants = {
     opened: {
         scale: 1.5,
-        marginRight: "30px"
+        marginRight: "50px"
     },
     closed: { scale: .9 },
 }
@@ -77,14 +81,13 @@ const baseTransition = {
     type: "spring",
     stiffness: 350,
     damping: 50,
-    duration: 200,
 }
 
 const historicVariants = {
     visible: {
         opacity: 1,
         transition: {
-            delay: .4
+            delay: .3,
         }
     },
     hidden: {

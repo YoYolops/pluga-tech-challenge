@@ -9,7 +9,7 @@
     flex-direction: column;
     border-radius: 5px;
     padding: 8px 2px;
-    width: clamp( 25%, 120px, 85px);
+    width: clamp( 28%, 120px, 85px);
     font-weight: bold;
 }
 
@@ -38,7 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 7px;
     width: 100%;
 }
 
