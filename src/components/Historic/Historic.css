@@ -1,3 +1,11 @@
+.historic_container {
+    display: none;
+    width: 100%;
+}
+
+.app_card_container[isOpen="true"] .historic_container {
+    display: block;
+}
 
 .historic_item_container {
     text-decoration: none;
@@ -37,14 +45,16 @@
 .historic_cards_wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 7px;
+    justify-content: space-between;
+    gap: 5px;
     width: 100%;
+    padding: 10px 30px;
+
 }
 
 #historic_title {
     width: 100%;
     font-size: 1.1rem;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 5px 30px;
+    margin-bottom: 10px;
 }

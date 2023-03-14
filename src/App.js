@@ -6,11 +6,11 @@ import Header from "./components/Header";
 
 function App() {
     const { getData, updateHistoric, filteredData } = useContext(DataContext)
+    const [ selectedCard, setSelectedCard ] = useState({});
     const [ renderedData, setRenderedData ] = useState({
         data: getData(0),
-        chunk: 0
+        chunk: 0,
     });
-    const [ selectedCard, setSelectedCard ] = useState({});
 
     function closeModal(currentSelectedData) {
         setSelectedCard({})
@@ -22,7 +22,7 @@ function App() {
             if(entries.some(entry => entry.isIntersecting)) {
                 setRenderedData(prev => ({
                     data: [...prev.data, ...getData(prev.chunk + 1)],
-                    chunk: prev.chunk + 1
+                    chunk: prev.chunk + 1,
                 }))
             }
         })
@@ -47,8 +47,8 @@ function App() {
                                                 mode="expandable" />)
             }
             
-                <div id="sentinel" />
             </section>
+            <div id="sentinel" />
         </div>
     );
 }

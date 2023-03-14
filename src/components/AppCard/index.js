@@ -3,11 +3,12 @@ import "./AppCard.css"
 import Anchor from "../generics/Anchor";
 import Historic from "../Historic";
 import CloseIcon from "../../assets/icons/CloseIcon";
+import { memo } from "react";
 
-export default function AppCard({ appData, select, isOpen, close }) {
-
+function AppCard({ appData, select, isOpen, close }) {
     return (
         <motion.div className="app_card" layout
+            style={{ cursor: isOpen ? "auto" : "pointer" }}
             onClick={select}
         >
             <motion.div layout className="app_card_container"
@@ -21,7 +22,7 @@ export default function AppCard({ appData, select, isOpen, close }) {
                 }}
             >
                 <motion.div layout className="modal"
-                    transition={{ ...baseTransition, when: "beforeChildren" }}
+                    transition={{ ...baseTransition, when: isOpen ? "afterChildren" : "beforeChildren" }}
                     onClick={e => { if(isOpen) e.stopPropagation() }}
                 >
                     <motion.section className="details_container">
@@ -41,15 +42,7 @@ export default function AppCard({ appData, select, isOpen, close }) {
                     </motion.section>
 
                 
-                    <motion.section
-                        layout
-                        className="historic_container"
-                        variants={historicVariants}
-                        initial="hidden"
-                        animate={isOpen ? "visible" : "hidden"}
-                    >
-                        <Historic />
-                    </motion.section>
+                    {isOpen && <Historic isVisible={isOpen}/>}
                     
                     <motion.button layout className="close_button"
                         initial={{ opacity: 0 }}
@@ -82,14 +75,4 @@ const baseTransition = {
     damping: 50,
 }
 
-const historicVariants = {
-    visible: {
-        opacity: 1,
-        transition: {
-            delay: .3,
-        }
-    },
-    hidden: {
-        opacity: 0,
-    }
-}
+export default memo(AppCard);

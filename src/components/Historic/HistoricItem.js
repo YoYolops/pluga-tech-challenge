@@ -1,8 +1,10 @@
 import { motion } from "framer-motion"
 import "./Historic.css"
 import { isColorLightOrDark } from "../../helpers"
+import { memo, useMemo } from "react"
 
-export default function HisotricItem({ itemData }) {
+function HistoricItem({ itemData }) {
+    const colorType = useMemo(() => isColorLightOrDark(itemData.color), [itemData])
 
     return (
         <motion.a
@@ -12,7 +14,7 @@ export default function HisotricItem({ itemData }) {
             style={{
                 background: itemData.app_id ? "unset" : "linear-gradient(to bottom, #27aae1 50%, white 50%)",
                 backgroundColor: itemData.app_id ? itemData.color : "#27aae1",
-                color: isColorLightOrDark(itemData.color) === "dark" ? "#fff" : "#000",
+                color: colorType === "dark" ? "#fff" : "#000",
                 border: itemData.app_id ? "none" : "1px solid #27aae1"
             }}
         >
@@ -29,3 +31,5 @@ export default function HisotricItem({ itemData }) {
         </motion.a>
     )
 }
+
+export default memo(HistoricItem);

@@ -20,32 +20,12 @@
     z-index: 1;
 }
 
-.app_card_container[isOpen="true"] {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    border-radius: 0px;
-    padding: 0px;
-    top: 0px;
-    left: 0px;
-    background-color: #efeeeedd;
-    z-index: 10;
-}
-
 .modal {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.app_card_container[isOpen="true"] .modal {
-    background-color: #fefffe;
-    width: clamp(30%, 500px, 90%);
-    height: min(60vh, 400px);
-    border-radius: 20px;
-    position: fixed;
 }
 
 .details_container {
@@ -55,6 +35,7 @@
     justify-content: center;
     text-align: center;
     margin: 0;
+    padding-top: 10px;
 }
 
 .text_details {
@@ -62,16 +43,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-
-.app_card_container[isOpen="true"] p {
-    margin-bottom: 10px;
-}
-
-.app_card_container[isOpen="true"] .details_container {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 45px;
 }
 
 .details {
@@ -94,14 +65,10 @@
     pointer-events: none;
 }
 
-.app_card_container[isOpen="true"] .tool_link {
-    pointer-events: unset;
-}
-
 .close_button {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 7px;
+    right: 7px;
     outline: none;
     border: none;
 	cursor: pointer;
@@ -109,11 +76,36 @@
     background: none;
 }
 
-.historic_container {
-    display: none;
+.app_card_container[isOpen="true"] .tool_link {
+    pointer-events: unset;
 }
 
-.app_card_container[isOpen="true"] .historic_container {
-    display: block;
-    width: 100%;
+.app_card_container[isOpen="true"] p {
+    margin-bottom: 10px;
+}
+
+.app_card_container[isOpen="true"] .details_container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 45px;
+}
+
+.app_card_container[isOpen="true"] .modal {
+    background-color: #fefffe;
+    width: clamp(30%, 500px, 90%);
+    height: min(55vh, 400px);
+    border-radius: 20px;
+    position: fixed;
+}
+
+.app_card_container[isOpen="true"] {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    border-radius: 0px;
+    padding: 0px;
+    top: 0px;
+    left: 0px;
+    background-color: #efeeeedd;
+    z-index: 10;
 }
