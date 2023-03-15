@@ -22,6 +22,7 @@ function AppCard({ appData, select, isOpen, close }) {
                 }}
             >
                 <motion.div layout className="modal"
+                    style={{ border: isOpen ? `3px solid ${appData.color}` : ""}}
                     transition={{ ...baseTransition, when: isOpen ? "afterChildren" : "beforeChildren" }}
                     onClick={e => { if(isOpen) e.stopPropagation() }}
                 >
