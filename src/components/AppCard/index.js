@@ -12,7 +12,7 @@ function AppCard({ appData, select, isOpen, close }) {
             onClick={select}
         >
             <motion.div layout className="app_card_container"
-                isOpen={`${isOpen}`}
+                isopen={`${isOpen}`}
                 transition={baseTransition}
                 onClick={e => {
                     if(isOpen) {
