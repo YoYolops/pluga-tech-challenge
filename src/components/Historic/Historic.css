@@ -3,7 +3,7 @@
     width: 100%;
 }
 
-.app_card_container[isOpen="true"] .historic_container {
+.app_card_container[isopen="true"] .historic_container {
     display: block;
 }
 

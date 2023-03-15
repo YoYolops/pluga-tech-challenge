@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import data from "../assets/data.json";
 import APP_CONFIG from "../app.config";
 import { findHighestKey, formatUnderscoredString } from "../helpers";
 
@@ -14,8 +13,8 @@ export function DataContextProvider({ children }) {
         const firstIndex = paginationChunk*APP_CONFIG.pagination
         const lastIndex = firstIndex+APP_CONFIG.pagination
         
-        if(firstIndex >= data.length) return [];
-        return data.slice(firstIndex, data[lastIndex] ? lastIndex : data.length)
+        if(firstIndex >= APP_CONFIG.mainData.length) return [];
+        return APP_CONFIG.mainData.slice(firstIndex, APP_CONFIG.mainData[lastIndex] ? lastIndex : APP_CONFIG.mainData.length)
     }
 
     function updateHistoric(lastSelected) {
@@ -28,11 +27,11 @@ export function DataContextProvider({ children }) {
 
     useEffect(() => {
         async function getUpdatedPlugaRanking() {
-            const data = await fetch(APP_CONFIG.rankingBaseUrl)
+            const rankingData = await fetch(APP_CONFIG.rankingBaseUrl)
                 .then(response => response.json())
     
             const topFour = 
-                findHighestKey({ array: data, keyName: "rank", topAmount: 4, ignore: ["zaga"] })
+                findHighestKey({ array: rankingData, keyName: "rank", topAmount: 4, ignore: ["zaga"] })
                 .map(highestRank => ({
                     ...highestRank,
                     name: formatUnderscoredString(highestRank.name),
@@ -48,10 +47,9 @@ export function DataContextProvider({ children }) {
 
     function filterData(filterFunction) {
         setFilteredData(() => {
-            const preFilteredData = data.filter(filterFunction)
-
+            const preFilteredData = APP_CONFIG.mainData.filter(filterFunction)
             if(preFilteredData.length) return preFilteredData
-            else return false
+            return false
         })
     }
     

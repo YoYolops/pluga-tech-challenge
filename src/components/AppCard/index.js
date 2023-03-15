@@ -7,7 +7,7 @@ import { memo } from "react";
 
 function AppCard({ appData, select, isOpen, close }) {
     return (
-        <motion.div className="app_card" layout
+        <motion.div className="app_card_slot" layout
             style={{ cursor: isOpen ? "auto" : "pointer" }}
             onClick={select}
         >
@@ -26,7 +26,7 @@ function AppCard({ appData, select, isOpen, close }) {
                     transition={{ ...baseTransition, when: isOpen ? "afterChildren" : "beforeChildren" }}
                     onClick={e => { if(isOpen) e.stopPropagation() }}
                 >
-                    <motion.section className="details_container">
+                    <motion.section layout className="details_container">
                         <motion.img layout className="app_icon"
                             variants={appLogoVariants}
                             initial="closed"
@@ -47,7 +47,7 @@ function AppCard({ appData, select, isOpen, close }) {
                     <motion.button layout className="close_button"
                         initial={{ opacity: 0 }}
                         style={{ pointerEvents: isOpen ? "unset" : "none" }}
-                        animate={isOpen ? {opacity: 1} : {opacity: 0}}
+                        animate={isOpen ? { opacity: 1} : { opacity: 0 }}
                         onClick={e => {
                             e.stopPropagation()
                             close()

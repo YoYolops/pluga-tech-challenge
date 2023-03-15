@@ -1,4 +1,4 @@
-.app_card_container, .app_card {
+.app_card_container, .app_card_slot {
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -6,7 +6,7 @@
     flex-direction: column;
 }
 
-.app_card {
+.app_card_slot {
     border: 1px solid #e7edf2;
     width: 180px;
     height: 180px;

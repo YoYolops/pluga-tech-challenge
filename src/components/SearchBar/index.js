@@ -11,15 +11,14 @@ export default function SearchBar() {
     }
 
     return (
-            <form className="search_bar_container"
+            <form 
+                className="search_bar_container"
                 onSubmit={e => {
                     e.preventDefault()
                     performSearch(e.target.elements.searchQuery.value)
                 }}
             >
-                <button
-                    type="submit"
-                >
+                <button type="submit">
                     <SearchIcon height="32px" width="32px" color="#0ea6fe" />
                 </button>
 

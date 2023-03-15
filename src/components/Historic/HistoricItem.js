@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import "./Historic.css";
 import { isColorLightOrDark } from "../../helpers";
 import { memo, useMemo } from "react";
@@ -7,8 +6,7 @@ function HistoricItem({ itemData }) {
     const colorType = useMemo(() => isColorLightOrDark(itemData.color), [itemData])
 
     return (
-        <motion.a
-            layout
+        <a
             className="historic_item_container"
             href={itemData.link}
             style={{
@@ -29,7 +27,7 @@ function HistoricItem({ itemData }) {
             />
 
             <p id="historic_item_name">{itemData.name}</p>
-        </motion.a>
+        </a>
     )
 }
 

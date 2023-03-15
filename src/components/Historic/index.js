@@ -32,10 +32,10 @@ export default function Historic({ isVisible }) {
             initial="hidden"
             animate={isVisible ? "visible" : "hidden"}
         >
-            <motion.h2 layout id="historic_title">{wichTitleShouldBeRendered()}</motion.h2>
-            <motion.div className="historic_cards_wrapper">
+            <h2 layout id="historic_title">{wichTitleShouldBeRendered()}</h2>
+            <div className="historic_cards_wrapper">
                 {recommendations.map((data, index) => <HistoricItem key={`${data.name}historicitem${index}`} itemData={data} />)}
-            </motion.div>
+            </div>
         </motion.section>
     ) 
 }
