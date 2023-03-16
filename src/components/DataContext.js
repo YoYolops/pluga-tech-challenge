@@ -26,7 +26,7 @@ export function DataContextProvider({ children }) {
     }
 
     useEffect(() => {
-        async function getUpdatedPlugaRanking() {
+        void async function getUpdatedPlugaRanking() {
             const rankingData = await fetch(APP_CONFIG.rankingBaseUrl)
                 .then(response => response.json())
     
@@ -39,10 +39,8 @@ export function DataContextProvider({ children }) {
                     color: "#ffffff",
                     icon: `${APP_CONFIG.appIconLinksBaseUrl + highestRank.name}/${highestRank.name}-icon.svg`
                 }))
-    
             setHighestRanked(topFour)
-        }
-        getUpdatedPlugaRanking()
+        }()
     }, [])
 
     function filterData(filterFunction) {

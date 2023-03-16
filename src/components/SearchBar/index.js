@@ -1,13 +1,28 @@
 import "./SearchBar.css";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import SearchIcon from "../../icons/SearchIcon";
 import DataContext from "../DataContext";
+import { isKeyPressEventAlphaNumeric } from "../../helpers"
 
 export default function SearchBar() {
     const { filterData } = useContext(DataContext)
+    const inputRef = useRef()
 
-    function performSearch(searchQuery) {
-        filterData(data => (data.name.toLowerCase().search(searchQuery.toLowerCase()) >= 0))
+    useEffect(() => {
+        function onAlphaNumericHandler(event) {
+            if(
+                !(inputRef.current === document.activeElement)&&
+                isKeyPressEventAlphaNumeric(event)
+            ) {
+                inputRef.current.focus()
+            }
+        }
+        window.addEventListener("keydown", onAlphaNumericHandler)
+        return () => { window.removeEventListener("keydown", onAlphaNumericHandler) }
+    }, [])
+
+    function performSearch(searchInput) {
+        filterData(data => (data.name.toLowerCase().search(searchInput.toLowerCase()) >= 0))
     }
 
     return (
@@ -15,7 +30,7 @@ export default function SearchBar() {
                 className="search_bar_container"
                 onSubmit={e => {
                     e.preventDefault()
-                    performSearch(e.target.elements.searchQuery.value)
+                    performSearch(e.target.elements.searchInput.value)
                 }}
             >
                 <button type="submit">
@@ -23,8 +38,9 @@ export default function SearchBar() {
                 </button>
 
                 <input 
+                    ref={inputRef}
                     type="text"
-                    name="searchQuery"
+                    name="searchInput"
                     onChange={e => performSearch(e.target.value)}
                     placeholder="Buscar ferramenta"
                     autoComplete="off"

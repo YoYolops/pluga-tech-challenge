@@ -22,7 +22,6 @@ function App() {
                 }))
             }
         })
-
         intersectionObserver.observe(document.querySelector("#sentinel"))
 
         return () => intersectionObserver.disconnect()

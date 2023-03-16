@@ -47,7 +47,7 @@ function AppCard({ appData, select, isOpen, close }) {
                     <motion.button layout className="close_button"
                         initial={{ opacity: 0 }}
                         style={{ pointerEvents: isOpen ? "unset" : "none" }}
-                        animate={isOpen ? { opacity: 1} : { opacity: 0 }}
+                        animate={ isOpen ? {opacity: 1} : {opacity: 0} }
                         onClick={e => {
                             e.stopPropagation()
                             close()
