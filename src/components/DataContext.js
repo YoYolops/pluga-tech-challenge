@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useCallback } from "react";
 import APP_CONFIG from "../app.config";
 import { findHighestKey, formatUnderscoredString } from "../helpers";
 
@@ -8,22 +8,6 @@ export function DataContextProvider({ children }) {
     const [ highestRanked, setHighestRanked ] = useState([])
     const [ historic, setHistoric ] = useState([])
     const [ filteredData, setFilteredData ] = useState([])
-
-    function getData(paginationChunk) {
-        const firstIndex = paginationChunk*APP_CONFIG.pagination
-        const lastIndex = firstIndex+APP_CONFIG.pagination
-        
-        if(firstIndex >= APP_CONFIG.mainData.length) return [];
-        return APP_CONFIG.mainData.slice(firstIndex, APP_CONFIG.mainData[lastIndex] ? lastIndex : APP_CONFIG.mainData.length)
-    }
-
-    function updateHistoric(lastSelected) {
-        setHistoric(prev => {
-            const recommendedSet = new Set([...prev, lastSelected])
-            if(recommendedSet.size > 3) return [...recommendedSet].slice(recommendedSet.size-3, recommendedSet.size)
-            return [...recommendedSet]
-        })
-    }
 
     useEffect(() => {
         void async function getUpdatedPlugaRanking() {
@@ -42,6 +26,22 @@ export function DataContextProvider({ children }) {
             setHighestRanked(topFour)
         }()
     }, [])
+
+    const getData = useCallback((paginationChunk) => {
+        const firstIndex = paginationChunk*APP_CONFIG.pagination
+        const lastIndex = firstIndex+APP_CONFIG.pagination
+        
+        if(firstIndex >= APP_CONFIG.mainData.length) return [];
+        return APP_CONFIG.mainData.slice(firstIndex, APP_CONFIG.mainData[lastIndex] ? lastIndex : APP_CONFIG.mainData.length)
+    }, [])
+
+    function updateHistoric(lastSelected) {
+        setHistoric(prev => {
+            const recommendedSet = new Set([...prev, lastSelected])
+            if(recommendedSet.size > 3) return [...recommendedSet].slice(recommendedSet.size-3, recommendedSet.size)
+            return [...recommendedSet]
+        })
+    }
 
     function filterData(filterFunction) {
         setFilteredData(() => {

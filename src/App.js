@@ -25,7 +25,7 @@ function App() {
         intersectionObserver.observe(document.querySelector("#sentinel"))
 
         return () => intersectionObserver.disconnect()
-    }, [])
+    }, [getData])
 
     function closeModal(currentSelectedData) {
         setSelectedCard({})

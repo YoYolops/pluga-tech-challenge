@@ -4,7 +4,6 @@ import { memo, useMemo } from "react";
 
 function HistoricItem({ itemData }) {
     const colorType = useMemo(() => isColorLightOrDark(itemData.color), [itemData])
-
     return (
         <a
             className="historic_item_container"
