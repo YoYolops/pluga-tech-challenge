@@ -3,11 +3,10 @@ import "./AppCard.css";
 import Anchor from "../generics/Anchor";
 import Historic from "../Historic";
 import CloseIcon from "../../icons/CloseIcon";
-import { memo } from "react";
 
 function AppCard({ appData, select, isOpen, close }) {
     return (
-        <motion.div className="app_card_slot" layout
+        <motion.div className="app_card_slot"
             style={{ cursor: isOpen ? "auto" : "pointer" }}
             onClick={select}
         >
@@ -22,16 +21,16 @@ function AppCard({ appData, select, isOpen, close }) {
                 }}
             >
                 <motion.div layout className="modal"
-                    style={{ border: isOpen ? `3px solid ${appData.color}` : ""}}
-                    transition={{ ...baseTransition, when: isOpen ? "afterChildren" : "beforeChildren" }}
+                    style={{ border: isOpen ? `3px solid ${appData.color}` : void(0) }}
+                    transition={baseTransition}
                     onClick={e => { if(isOpen) e.stopPropagation() }}
                 >
                     <motion.section layout className="details_container">
                         <motion.img layout className="app_icon"
+                            style={{backgroundColor: appData.color}}
                             variants={appLogoVariants}
                             initial="closed"
                             animate={isOpen ? "opened" : "closed"}
-                            style={{backgroundColor: appData.color}}
                             alt={`Logo de ${appData.name}`}
                             src={appData.icon}
                         />
@@ -45,9 +44,10 @@ function AppCard({ appData, select, isOpen, close }) {
                     { isOpen && <Historic isVisible={isOpen}/> }
                     
                     <motion.button layout className="close_button"
-                        initial={{ opacity: 0 }}
                         style={{ pointerEvents: isOpen ? "unset" : "none" }}
-                        animate={ isOpen ? {opacity: 1} : {opacity: 0} }
+                        variants={closeButtonVariants}
+                        initial="closed"
+                        animate={ isOpen ? "opened" : "closed" }
                         onClick={e => {
                             e.stopPropagation()
                             close()
@@ -59,6 +59,11 @@ function AppCard({ appData, select, isOpen, close }) {
             </motion.div>
         </motion.div>
     )
+}
+
+const closeButtonVariants = {
+    opened: { opacity: 1 },
+    closed: { opacity: 0 }
 }
 
 const appLogoVariants = {
@@ -75,4 +80,4 @@ const baseTransition = {
     damping: 50,
 }
 
-export default memo(AppCard);
+export default AppCard;
