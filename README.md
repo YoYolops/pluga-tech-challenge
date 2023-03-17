@@ -3,8 +3,6 @@
 
 - Para rodar localmente: 
 ```bash
-git clone https://github.com/YoYolops/pluga-tech-challenge
-npm i
-npm start
+git clone https://github.com/YoYolops/pluga-tech-challenge && cd pluga-tech-challenge && npm i && npm start
 ```
 
